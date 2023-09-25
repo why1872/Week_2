@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P2_018</title>
+    <link rel="stylesheet" href="style.css"/>
+
+</head>
+<body>
+    <div class="header1">P2_018</div>
+    <form onsubmit="return validate()">
+        <table>
+            <tbody>
+                <tr>
+                    <td>Nama</td>
+                    <td>:</td>
+                    <td>
+                        <input id="nama" type="text"/>
+                    </td>
+                    <td id="error_nama" style="color: red"></td>
+                </tr>
+                <tr>
+                    <td>Mata Kuliah</td>
+                    <td>:</td>
+                    <td>
+                        <select id="matakuliah">
+                            <option value="" >Pilih Mata Kuliah</option>
+                            <option value="Matematika">Matematika</option>
+                            <option value="Fisika">Fisika</option>
+                            <option value="Kimia">Kimia</option>
+                        </select>
+                    </td>
+                    <td id="error_matakuliah" style="color: red"></td>
+                </tr>
+                <tr>
+                    <td>Nilai</td>
+                    <td>:</td>
+                    <td>
+                        <input id="nilai" type="number" min ="1" max="100"/>
+                    </td>
+                    <td id="error_nilai" style="color:red"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" onclick="cancelSubmit()">
+                            Batal
+                        </button>
+                    </td>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="Kirim"/>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    <script>
+        function validate(){
+            let nama= document.getElementById("nama").value;
+            let matakuliah= document.getElementById("matakuliah").value;
+            let nilai= document.getElementById("nilai").value;
+            let validate = true;
+
+            //validasi Nama
+        //validasi Nama
+        if (nama.trim()===""){
+                document.getElementById("error_nama").innerText ="Harap isi field nama";
+                validate = false;
+            }else if (nama.length > 20) {
+                document.getElementById("error_nama").innerText = "Nama maksimal 20 huruf";
+                validate = false;
+            }else{
+                let namaPattern = /^[a-zA-Z\s]*$/;
+                if(!namaPattern.test(nama.trim())){
+                    document.getElementById("error_nama").innerText ="Nama harus berisi huruf atau spasi!";
+                    validate = false;
+                }else{
+                    document.getElementById("error_nama").innerText ="";
+                }
+            }
+        
+    
+
+
+            //validasi matakuliah
+            if(matakuliah === ""){
+                document.getElementById("error_matakuliah").innerText="Harap pilih matakuliah!";
+                validate = false;
+            }else{
+                document.getElementById("error_matakuliah").innerText ="";
+            }
+            //validasi Nilai
+            if(nilai===""){
+                document.getElementById("error_nilai").innerText ="Harap isi field nilai!";
+                validate = false;
+            }else if (isNaN(nilai) || parseFloat(nilai) < 0 || parseFloat(nilai) > 100) {
+                document.getElementById("error_nilai").innerText = "Nilai harus antara 0 dan 100!";
+                validate = false;
+            }else{
+                document.getElementById("error_nilai").innerText="";
+            }
+
+            if(validate){
+                alert('Your answer is sent');
+            }
+
+            return validate;
+        }
+        
+
+        function cancelSubmit() {
+            alert('Your answer is cancelled');
+            document.getElementById("nama").value = ""; // Reset the input field for "Nama"
+            document.getElementById("matakuliah").value = ""; // Reset the dropdown for "Mata Kuliah"
+            document.getElementById("nilai").value = ""; // Reset the input field for "Nilai"
+            document.getElementById("error_nama").innerText = ""; // Clear any error messages for "Nama"
+            document.getElementById("error_matakuliah").innerText = ""; // Clear any error messages for "Mata Kuliah"
+            document.getElementById("error_nilai").innerText = ""; // Clear any error messages for "Nilai"
+        }
+
+    </script>
+    
+</body>
+</html>
